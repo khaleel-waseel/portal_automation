@@ -1,3 +1,5 @@
+import sys
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -12,18 +14,19 @@ import time
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
-import EmailReceiver as EmailReceiver
+from tools.EmailReceiver import EmailReceiver
 import json
 import os
 from pathlib import Path
 import shutil
+import logging
 from tools.email import SendEmail
-
+from tools.logging_setup import init as init_logging
 
 
 CLIENT_ID = "e5727438-df7b-4945-93b2-3cfb6dace85c"
 TENANT_ID = "7c01a8ce-61c6-4a98-a1c3-0062f98a7cc9"
-receiver = EmailReceiver.EmailReceiver(CLIENT_ID=CLIENT_ID, TENANT_ID=TENANT_ID)
+receiver = EmailReceiver(CLIENT_ID=CLIENT_ID, TENANT_ID=TENANT_ID)
 
 CONFIG = json.load(open("config.json"))
 MONTHS = json.loads(open('config.json').read())['months']
@@ -44,6 +47,12 @@ options.add_experimental_option("prefs", {
     "download.directory_upgrade": True,
     "safebrowsing.enabled": True
 })
+
+def get_base_path():
+    if getattr(sys, 'frozen', False):
+        return os.path.dirname(sys.executable)  # When running as EXE
+    else:
+        return os.path.dirname(os.path.abspath(__file__))  # When running as script
 
 def get_batch_ref(row, driver, wait): #gets the batch ref and file name before downloading the file
 
@@ -454,10 +463,16 @@ def send_report(business_recipients=BUSINESS_RECIPIENTS): #sends report
                             business_recipients=business_recipients,
                             attachment_list=[])
 
+def init():
+    os.makedirs(get_base_path() + '/downloads', exist_ok=True)
+    init_logging(prefix='Log_Download')
+
+
 
 if __name__ == '__main__':
-
+    init()
     for user in USERS_INFO:
+        logging.info(f'Processing user : {user['username']}')
         sleep(2)
         download_automation(username=user['username'],password=user['password'],)
 
