@@ -129,7 +129,6 @@
   "smtp_username": "rpa1@waseel.com",
   "smtp_password": "smtp_password",
   "smtp_displayname": "Approvals RPA",
-  "subject": "RPA TEST",
   "local_onedrive_path" : "local_onedrive_path",
   "sp_input_folder" : "automations/TAWUNIYA REJECTION/INPUT",
   "CLIENT_ID": "e5727438-df7b-4945-93b2-3cfb6dace85c",

@@ -605,7 +605,12 @@ if __name__ == '__main__':
 
         receiver, DOWNLOAD_DIR = init()
 
-        download_automation(username="rpa1.dkmc", password="Rpa@waseel123")
+        for user in USERS_INFO:
+
+            logging.info(f'Processing user : {user['username']}')
+            sleep(2)
+            download_automation(username=user['username'],password=os.getenv(user['password']),)
+
         move_files(source=DOWNLOAD_DIR)
         send_report()
 
