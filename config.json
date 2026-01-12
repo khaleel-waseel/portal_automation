@@ -4,130 +4,134 @@
     {
       "file_name": "dkmc",
       "username": "rpa1.dkmc",
-      "password": "Rpa@waseel123"
+      "password": "portal_password"
     },    {
       "file_name": "fspc",
       "username": "rpa1.fspc",
-      "password": "Rpa@waseel123"
+      "password": "portal_password"
     },    {
       "file_name": "kaauh",
       "username": "rpa1.kaauh",
-      "password": "Rpa@waseel123"
+      "password": "portal_password"
     },    {
       "file_name": "mopc",
       "username": "rpa1.mopc",
-      "password": "Rpa@waseel123"
+      "password": "portal_password"
     },    {
       "file_name": "rai",
       "username": "rpa1.rai",
-      "password": "Rpa@waseel123"
+      "password": "portal_password"
     },    {
       "file_name": "noupm",
       "username": "rpa1.noupm",
-      "password": "Rpa@waseel123"
+      "password": "portal_password"
     },    {
       "file_name": "dkl",
       "username": "rpa1.dkl",
-      "password": "Rpa@waseel123"
+      "password": "portal_password"
     },    {
       "file_name": "tala",
       "username": "rpa1.tala",
-      "password": "Rpa@waseel123"
+      "password": "portal_password"
     },    {
       "file_name": "takh",
       "username": "rpa1.takh",
-      "password": "Rpa@waseel123"
+      "password": "portal_password"
     },    {
       "file_name": "mass",
       "username": "rpa1.mass",
-      "password": "Rpa@waseel123"
+      "password": "portal_password"
     },    {
       "file_name": "shdm",
       "username": "rpa1.shdm",
-      "password": "Rpa@waseel123"
+      "password": "portal_password"
     },    {
       "file_name": "midn",
       "username": "rpa1.midn",
-      "password": "Rpa@waseel123"
+      "password": "portal_password"
     },    {
       "file_name": "khlod",
       "username": "rpa1.khlod",
-      "password": "Rpa@waseel123"
+      "password": "portal_password"
     },    {
       "file_name": "mcs",
       "username": "rpa1.mcs",
-      "password": "Rpa@waseel123"
+      "password": "portal_password"
     },    {
       "file_name": "qima",
       "username": "rpa1.qima",
-      "password": "Rpa@waseel123"
+      "password": "portal_password"
     },    {
       "file_name": "fctr",
       "username": "rpa1.fctr",
-      "password": "Rpa@waseel123"
+      "password": "portal_password"
     },        {
       "file_name": "camc",
       "username": "rpa1.camc",
-      "password": "Rpa@waseel123"
+      "password": "portal_password"
     },    {
       "file_name": "stp",
       "username": "rpa1.stp",
-      "password": "Rpa@waseel123"
+      "password": "portal_password"
     },    {
       "file_name": "aomc",
       "username": "rpa1.aomc",
-      "password": "Rpa@waseel123"
+      "password": "portal_password"
     },    {
       "file_name": "kalap",
       "username": "rpa1.kalap",
-      "password": "Rpa@waseel123"
+      "password": "portal_password"
     },    {
       "file_name": "orc1",
       "username": "rpa1.orc1",
-      "password": "Rpa@waseel123"
+      "password": "portal_password"
     },       {
       "file_name": "amnp",
       "username": "rpa1.amnp",
-      "password": "Rpa@waseel123"
+      "password": "portal_password"
     },    {
       "file_name": "snc",
       "username": "rpa1.snc",
-      "password": "Rpa@waseel123"
+      "password": "portal_password"
     },    {
       "file_name": "ahm",
       "username": "rpa1.ahm",
-      "password": "Rpa@waseel123"
+      "password": "portal_password"
     },    {
       "file_name": "qasm",
       "username": "rpa1.qasm",
-      "password": "Rpa@waseel123"
+      "password": "portal_password"
     },    {
       "file_name": "nomask",
       "username": "rpa1.nomask",
-      "password": "Rpa@waseel123"
+      "password": "portal_password"
     },    {
       "file_name": "nomasw",
       "username": "rpa1.nomasw",
-      "password": "Rpa@waseel123"
+      "password": "portal_password"
     },    {
       "file_name": "nomais",
       "username": "rpa1.nomais",
-      "password": "Rpa@waseel123"
+      "password": "portal_password"
     },    {
       "file_name": "aln1",
       "username": "rpa1.aln1",
-      "password": "Rpa@waseel123"
+      "password": "portal_password"
     },    {
       "file_name": "dad",
       "username": "rpa1.dad",
-      "password": "Rpa@waseel123"
+      "password": "portal_password"
     }
   ],
   "business_recipients": "alshayasu@waseel.com",
   "smtp_host": "smtp.office365.com",
   "smtp_port": 587,
   "smtp_username": "rpa1@waseel.com",
-  "smtp_password": "Muaaz@321",
+  "smtp_password": "smtp_password",
   "smtp_displayname": "Approvals RPA",
-  "subject": "RPA TEST"
+  "subject": "RPA TEST",
+  "local_onedrive_path" : "local_onedrive_path",
+  "sp_input_folder" : "automations/TAWUNIYA REJECTION/INPUT",
+  "CLIENT_ID": "e5727438-df7b-4945-93b2-3cfb6dace85c",
+  "TENANT_ID": "7c01a8ce-61c6-4a98-a1c3-0062f98a7cc9"
 }
