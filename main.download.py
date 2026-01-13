@@ -25,11 +25,19 @@ from tools.email import SendEmail
 from tools.logging_setup import init as init_logging
 
 
-CONFIG = json.load(open("config.json"))
+def get_base_path():
+    if getattr(sys, 'frozen', False):
+        return os.path.dirname(sys.executable)  # When running as EXE
+    else:
+        return os.path.dirname(os.path.abspath(__file__))  # When running as script
+
+
+
+CONFIG_PATH = Path(get_base_path()) / 'config.json'
+CONFIG = json.load(open(CONFIG_PATH))
 MONTHS = CONFIG['months']
 USERS_INFO = CONFIG['users_info']
 BUSINESS_RECIPIENTS = CONFIG['business_recipients']
-
 
 FINAL_DEST = Path(os.getenv(CONFIG['local_onedrive_path'])) / CONFIG['sp_input_folder']
 FINAL_DEST.mkdir(parents=True, exist_ok=True)
@@ -37,11 +45,7 @@ FINAL_DEST.mkdir(parents=True, exist_ok=True)
 options = webdriver.ChromeOptions()
 
 
-def get_base_path():
-    if getattr(sys, 'frozen', False):
-        return os.path.dirname(sys.executable)  # When running as EXE
-    else:
-        return os.path.dirname(os.path.abspath(__file__))  # When running as script
+
 
 def get_batch_ref(row, driver, wait): #gets the batch ref and file name before downloading the file
 
@@ -584,7 +588,7 @@ def init():
     DOWNLOAD_DIR.mkdir(parents=True, exist_ok=True)
     init_logging(prefix='Log_Download')
 
-    CLIENT_ID = CONFIG['CLIENT_ID'] # replace with config
+    CLIENT_ID = CONFIG['CLIENT_ID']
     TENANT_ID = CONFIG['TENANT_ID']
     receiver = EmailReceiver(CLIENT_ID=CLIENT_ID, TENANT_ID=TENANT_ID, token_file_path=get_base_path())
 
