@@ -313,10 +313,6 @@ def upload_automation(username, password):
     driver.quit()
 
 
-def send_report():
-    pass
-
-
 
 def init():
 

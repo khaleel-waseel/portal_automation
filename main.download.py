@@ -176,7 +176,7 @@ def check_req_table(wait):
 
         if not rows:
 
-            logging.info("No table or data found.")
+            logging.warning("No table or data found.")
 
             return False
 
@@ -538,31 +538,6 @@ def get_all_files_downloaded(download_dir):
 
     return recent_files
 
-def send_report(business_recipients=BUSINESS_RECIPIENTS): #sends report
-
-    email_sender = SendEmail(
-    smtp_host=CONFIG["smtp_host"],
-    smtp_port=CONFIG["smtp_port"],
-    smtp_username=CONFIG["smtp_username"],
-    smtp_password=os.getenv(CONFIG["smtp_password"]),
-    smtp_auth=True,
-    is_auth=True)
-
-    recent_files = get_all_files_downloaded(DOWNLOAD_DIR)
-    subject = "Tawuniya rejections"
-    bodypreview = f"Hi,<br><br>New Tawuniya rejections are available. Following are the new files:<br><br>{recent_files}<br><br>Thanks,<br><br>Waseel RPA"
-
-    if len(recent_files) == 0:
-        logging.info(f"[Report]No new files found, Email not sent.")
-    else:
-        email_sender.send_email(subject=subject,
-                                body=bodypreview,
-                                business_recipients=business_recipients,
-                                attachment_list=[])
-        logging.info(f"[Report]Email sent to {business_recipients}")
-
-
-
 def init():
 
     DOWNLOAD_DIR = Path(get_base_path()) / 'downloads'
@@ -597,7 +572,6 @@ if __name__ == '__main__':
             download_automation(username=user['username'],password=os.getenv(user['password']),)
 
         move_files(source=DOWNLOAD_DIR)
-        send_report()
 
     except Exception as e:
 

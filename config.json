@@ -123,7 +123,6 @@
       "password": "portal_password"
     }
   ],
-  "business_recipients": "alshayasu@waseel.com",
   "smtp_host": "smtp.office365.com",
   "smtp_port": 587,
   "smtp_username": "rpa1@waseel.com",
