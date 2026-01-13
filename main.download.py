@@ -81,7 +81,6 @@ def rename_file(filename, batch_ref, download_dir): #rename per file
 
     if "StatementOfAccount" not in filename:
 
-        print(f"Unexpected filename: {filename}")
         logging.warn(f"Unexpected filename: {filename}")
 
         return False
@@ -93,13 +92,11 @@ def rename_file(filename, batch_ref, download_dir): #rename per file
 
     if os.path.exists(new_path):
 
-        print(f"File already exists: {new_name}")
         logging.info(f"File already exists: {new_name}")
 
         return True
 
     os.rename(old_path, new_path)
-    print(f"Renamed: {filename} -> {new_name}")
     logging.info(f"Renamed: {filename} -> {new_name}")
 
     return True
@@ -123,7 +120,6 @@ def wait_for_single_download(before_files, download_dir, timeout=300):
             sleep(1)
 
     except (TimeoutError, TimeoutException) as e:
-        print("Single file download timeout")
         logging.error(traceback.print_exc())
         logging.error(e)
         logging.error("Single file download timeout")
@@ -164,11 +160,9 @@ def get_otp_code(retries=3, delay=20): #get otp code from email with retry
 
                 if len(otp_digits) >= 6:
 
-                    print(f"OTP received on attempt {attempt}")
                     logging.info(f"OTP received on attempt {attempt}")
                     return otp_digits
 
-        print(f"OTP not received yet. Retry {attempt}/{retries}")
         logging.warn(f"OTP not received yet. Retry {attempt}/{retries}")
 
     return None
@@ -182,7 +176,6 @@ def check_req_table(wait):
 
         if not rows:
 
-            print("No table or data found. Exiting.")
             logging.info("No table or data found.")
 
             return False
@@ -191,9 +184,8 @@ def check_req_table(wait):
 
     except TimeoutException as e:
 
-        print("No table or data found. Exiting.")
         logging.error(traceback.print_exc())
-        logging.error(e)
+        logging.error("No table or data found. Exiting.", e)
 
         return False
 
@@ -210,7 +202,7 @@ def download_center(driver, row, retries=5, delay=10):
 
             if file_status == status_list[0]:
 
-                print(file_status)
+                logging.info(file_status)
                 download_btn = row.find_element(By.XPATH, "./td[7]//button")
                 driver.execute_script(
                     "arguments[0].scrollIntoView({block:'center'}); arguments[0].click();",
@@ -219,13 +211,13 @@ def download_center(driver, row, retries=5, delay=10):
 
             elif file_status == status_list[1]: #preparing to downalod: wait
 
-                print(file_status)
                 logging.info(f"{file_status} waiting..")
                 sleep(50)
 
                 if file_status == status_list[0]:
 
                     sleep(delay)
+                    logging.info(file_status)
                     wait_for_download_btn = row.find_element(By.XPATH, "./td[7]//button")
                     driver.execute_script(
                         "arguments[0].scrollIntoView({block:'center'}); arguments[0].click();",
@@ -234,7 +226,8 @@ def download_center(driver, row, retries=5, delay=10):
 
             elif file_status not in status_list: #Failed to download: Retry Button
 
-                print(file_status)
+
+                logging.warning(file_status)
                 retry_btn = row.find_element(By.XPATH, "./td[7]//button")
 
                 if retry_btn:
@@ -253,7 +246,6 @@ def download_center(driver, row, retries=5, delay=10):
 
         except Exception as e:
 
-            print(f"Download center retry {attempt} failed:", e)
             logging.error(f"Download center retry {attempt} failed.")
             logging.error(traceback.print_exc())
             logging.error(e)
@@ -403,21 +395,18 @@ def download_automation(username, password):
                             EC.element_to_be_clickable((By.XPATH, "/html/body/div[2]/div[3]/div[2]/button")))
                         driver.execute_script("arguments[0].click();", download_req)
                         files_reqs += 1
-                        print(f"Requested download for {batch_ref} {month_text}")
                         logging.info(f"Requested download for {batch_ref} {month_text}")
 
                     elif batch_ref in installed_files:
 
-                        print(f"{batch_ref} {month_text} already downloaded.")
                         logging.info(f"Already downloaded {batch_ref} {month_text}")
 
                         pass
 
             except Exception as e:
 
-                print("Error: ", e)
                 logging.error(traceback.print_exc())
-                logging.error(e)
+                logging.error("Error: ", e)
 
         try:
 
@@ -451,7 +440,6 @@ def download_automation(username, password):
 
     if files_reqs == 0:
 
-        print("No files requested. Exiting.")
         logging.info("No files requested. Exiting.")
         driver.quit()
 
@@ -484,7 +472,6 @@ def download_automation(username, password):
 
             if not download_center(driver, row):
 
-                print("Download failed after retries")
                 logging.warning(f"{original_name}| {batch_ref} failed to download after retries")
                 continue
 
@@ -492,14 +479,12 @@ def download_automation(username, password):
 
             if not rename_file(downloaded_file, batch_ref, DOWNLOAD_DIR):
 
-                print("Failed to rename file")
                 logging.error("Failed to rename file.")
 
         except Exception as e:
 
-            print("Error processing row:", e)
             logging.error(traceback.print_exc())
-            logging.error(e)
+            logging.error("Error processing row:", e)
 
     wait.until(lambda d: d.execute_script("return document.readyState") == "complete")
     driver.quit()
@@ -507,9 +492,6 @@ def download_automation(username, password):
 
 
 def move_files(source: Path = None, destination: Path = FINAL_DEST):
-
-    #destination.mkdir(parents=True, exist_ok=True)
-
 
     excel_extensions = {".xls", ".xlsx", ".xlsm", ".xlsb"}
 
@@ -531,7 +513,6 @@ def move_files(source: Path = None, destination: Path = FINAL_DEST):
 
         if target.exists():
 
-            print(f"{file} already exists, skipping")
             logging.info(f"{file} already exists, skipping")
             continue
 
