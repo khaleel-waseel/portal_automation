@@ -1,6 +1,7 @@
 import sys
 import traceback
 
+import requests
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -37,7 +38,6 @@ CONFIG_PATH = Path(get_base_path()) / 'config.json'
 CONFIG = json.load(open(CONFIG_PATH))
 MONTHS = CONFIG['months']
 USERS_INFO = CONFIG['users_info']
-BUSINESS_RECIPIENTS = CONFIG['business_recipients']
 
 FINAL_DEST = Path(os.getenv(CONFIG['local_onedrive_path'])) / CONFIG['sp_input_folder']
 FINAL_DEST.mkdir(parents=True, exist_ok=True)
@@ -81,7 +81,7 @@ def rename_file(filename, batch_ref, download_dir): #rename per file
 
     if "StatementOfAccount" not in filename:
 
-        logging.warn(f"Unexpected filename: {filename}")
+        logging.warning(f"Unexpected filename: {filename}")
 
         return False
 
@@ -163,7 +163,7 @@ def get_otp_code(retries=3, delay=20): #get otp code from email with retry
                     logging.info(f"OTP received on attempt {attempt}")
                     return otp_digits
 
-        logging.warn(f"OTP not received yet. Retry {attempt}/{retries}")
+        logging.warning(f"OTP not received yet. Retry {attempt}/{retries}")
 
     return None
 
@@ -186,6 +186,10 @@ def check_req_table(wait):
 
         logging.error(traceback.print_exc())
         logging.error("No table or data found. Exiting.", e)
+
+    except Exception as e:
+        logging.error(traceback.print_exc())
+        logging.error(e)
 
         return False
 
@@ -491,11 +495,18 @@ def download_automation(username, password):
     logging.info(f'Done. Exiting..')
 
 
-def move_files(source: Path = None, destination: Path = FINAL_DEST):
+def move_files(source, destination: Path = FINAL_DEST):
 
-    excel_extensions = {".xls", ".xlsx", ".xlsm", ".xlsb"}
+    excel_extensions = {".xls", ".xlsx", f".xlsm", ".xlsb"}
+    providers = {
+        user["file_name"].lower(): {
+            "doctor": user["doctor"],
+            "provider_doctor_email": user["provider_doctor_email"],
+            "bucket_id": user["planner_bucket_id"]} for user in USERS_INFO}
 
-    for file in source.iterdir():
+
+    for file in source:
+
 
         if not file.is_file():
 
@@ -503,39 +514,39 @@ def move_files(source: Path = None, destination: Path = FINAL_DEST):
 
         if file.suffix.lower() not in excel_extensions:
 
-            logging.warn(f"File {file} not an Excel file.")
+            logging.warning(f"File {file} not an Excel file.")
             file.unlink()
-            logging.warn(f"File {file} removed.")
+            logging.warning(f"File {file} removed.")
 
             continue  #skip&remove non-Excel files
 
         target = destination / file.name
 
-        if target.exists():
+        #add to planner
 
-            logging.info(f"{file} already exists, skipping")
-            continue
+        first_part = file.name.split("_")[0].lower()
 
-        shutil.copy(file, target)
-        logging.info(f"{file} copied to {target}")
+        if first_part in providers:
+
+            provider = providers[first_part]
+            taskname = f"Tawuniya Rejection {file.name}"
+            add_task_planner(task_name=taskname, filename=file.name, provider_id=first_part,
+                             provider_doctor_email=provider["provider_doctor_email"], planner_bucket_id=provider["bucket_id"])
+            shutil.copy(file, target)
+            logging.info(f"{file} copied to {target}")
 
 
-def get_all_files_downloaded(download_dir):
+def get_all_files_downloaded(download_dir: Path):
 
-    #Current time
     now = time.time()
-    one_hour_ago = now - 3600  #3600 seconds = 1 hour
+    one_hour_ago = now - 3600
 
-    #List all files
-    files = os.listdir(download_dir)
-    files = [f for f in files if os.path.isfile(os.path.join(download_dir, f))]
+    recent_files = [
+        f for f in download_dir.iterdir()
+        if f.is_file() and f.stat().st_mtime >= one_hour_ago
+    ]
 
-    #Filter files modified within the last hour
-    recent_files = [f for f in files if os.path.getmtime(os.path.join(download_dir, f)) >= one_hour_ago]
-
-    #Sort by most recently modified
-    recent_files.sort(key=lambda f: os.path.getmtime(os.path.join(download_dir, f)), reverse=True)
-
+    recent_files.sort(key=lambda f: f.stat().st_mtime, reverse=True)
     return recent_files
 
 def init():
@@ -558,8 +569,21 @@ def init():
     return receiver, DOWNLOAD_DIR
 
 
+def add_task_planner(provider_id, task_name, filename,provider_doctor_email, planner_bucket_id):
+
+    user_id = provider_doctor_email
+    url = f'{CONFIG['planner_flow_url']}&group_id={CONFIG['planner_group_id']}&plan_id={CONFIG["planner_plan_id"]}&bucket_id={planner_bucket_id}&task_name={task_name}&user_id={user_id}&sp_link={CONFIG['provider_sp_folder_link']}'
+    response = requests.get(url)
+    if response.status_code == 200 and 'error' not in str(response.content):
+        logging.info(f'Task created successfully for provider: {provider_id} file name: {filename}')
+    else:
+        logging.error(f'Error creating task for provider: {provider_id}')
+        raise Exception('Error creating task')
+
+
 
 if __name__ == '__main__':
+
 
     try:
 
@@ -571,7 +595,8 @@ if __name__ == '__main__':
             sleep(2)
             download_automation(username=user['username'],password=os.getenv(user['password']),)
 
-        move_files(source=DOWNLOAD_DIR)
+        recent_files = get_all_files_downloaded(download_dir=DOWNLOAD_DIR)
+        move_files(recent_files)
 
     except Exception as e:
 
