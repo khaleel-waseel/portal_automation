@@ -22,7 +22,6 @@ import os
 from pathlib import Path
 import shutil
 import logging
-from tools.email import SendEmail
 from tools.logging_setup import init as init_logging
 
 
@@ -168,30 +167,31 @@ def get_otp_code(retries=3, delay=20): #get otp code from email with retry
     return None
 
 def check_req_table(wait):
-
     try:
+        #wait for loader to disappear
+        wait.until(
+            EC.invisibility_of_element_located((By.CLASS_NAME, "loader-wrapper")))
 
-        rows = wait.until(
-            EC.presence_of_all_elements_located((By.XPATH, "//table/tbody/tr")))
+        #wait for table body
+        wait.until(
+            EC.presence_of_element_located((By.XPATH, "//table/tbody")))
+
+        rows = wait._driver.find_elements(By.XPATH, "//table/tbody/tr")
 
         if not rows:
-
-            logging.warning("No table or data found.")
-
+            logging.info("Table loaded but contains no rows.")
             return False
 
         return True
 
-    except TimeoutException as e:
-
-        logging.error(traceback.print_exc())
-        logging.error("No table or data found. Exiting.", e)
-
-    except Exception as e:
-        logging.error(traceback.print_exc())
-        logging.error(e)
-
+    except TimeoutException:
+        logging.warning("Table did not load within timeout.")
         return False
+
+    except Exception:
+        logging.exception("Unexpected error while checking table.")
+        return False
+
 
 def download_center(driver, row, retries=5, delay=10):
 
@@ -414,11 +414,19 @@ def download_automation(username, password):
 
         try:
 
+            wait.until(
+                EC.invisibility_of_element_located((By.CLASS_NAME, "loader-wrapper")))
+
             next_button = wait.until(
-                EC.element_to_be_clickable(
+                EC.presence_of_element_located(
                     (By.XPATH,
                      "/html/body/div/section/section/div/div[2]/div/div[2]/div[2]/div[2]/div/div[3]/button[2]")))
-            next_button.click()
+
+            driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'}); arguments[0].click();",
+                next_button)
+
+            wait.until(EC.invisibility_of_element_located((By.CLASS_NAME, "loader-wrapper")))
             wait.until(EC.staleness_of(rows[0]))
             logging.info("[Table] Next page")
 
@@ -485,10 +493,10 @@ def download_automation(username, password):
 
                 logging.error("Failed to rename file.")
 
-        except Exception as e:
+        except Exception:
 
             logging.error(traceback.print_exc())
-            logging.error("Error processing row:", e)
+            logging.exception("Error processing row")
 
     wait.until(lambda d: d.execute_script("return document.readyState") == "complete")
     driver.quit()
@@ -522,14 +530,14 @@ def move_files(source, destination: Path = FINAL_DEST):
 
         target = destination / file.name
 
-        #add to planner
+        #Add to planner
 
         first_part = file.name.split("_")[0].lower()
 
         if first_part in providers:
 
             provider = providers[first_part]
-            taskname = f"Tawuniya Rejection {file.name}"
+            taskname = f"Tawuniya {file.name}"
             add_task_planner(task_name=taskname, filename=file.name, provider_id=first_part,
                              provider_doctor_email=provider["provider_doctor_email"], planner_bucket_id=provider["bucket_id"])
             shutil.copy(file, target)
