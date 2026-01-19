@@ -1,0 +1,218 @@
+{
+  "months": 3,
+  "users_info": [
+    {
+      "file_name": "dkmc",
+      "username": "rpa1.dkmc",
+      "password": "portal_password",
+      "doctor": "Dr. Riem",
+      "planner_bucket_id": "-3XzD9aIGUiMMZcIqgkRZ5cAJfJn",
+      "provider_doctor_email": "abdallari@waseel.com"
+
+    },    {
+      "file_name": "fspc",
+      "username": "rpa1.fspc",
+      "password": "portal_password",
+      "doctor": "Dr. Alanoud",
+      "planner_bucket_id": "eWbwO3fXnEGMZLaPfZMyDZcANWrM",
+      "provider_doctor_email": "alqabbanial@Waseel.com"
+    },      {
+      "file_name": "mopc",
+      "username": "rpa1.mopc",
+      "password": "portal_password",
+      "doctor": "Dr. Riem",
+      "planner_bucket_id": "-3XzD9aIGUiMMZcIqgkRZ5cAJfJn",
+      "provider_doctor_email": "abdallari@waseel.com"
+    },    {
+      "file_name": "rai",
+      "username": "rpa1.rai",
+      "password": "portal_password",
+      "doctor": "Dr. Amal",
+      "planner_bucket_id": "k9On3wnUGE-SLwshvbCqnpcAMfXi",
+      "provider_doctor_email": "mohamedam@Waseel.com"
+    },    {
+      "file_name": "noupm",
+      "username": "rpa1.noupm",
+      "password": "portal_password",
+      "doctor": "Dr. Amal",
+      "planner_bucket_id": "k9On3wnUGE-SLwshvbCqnpcAMfXi",
+      "provider_doctor_email": "mohamedam@Waseel.com"
+    },    {
+      "file_name": "dkl",
+      "username": "rpa1.dkl",
+      "password": "portal_password",
+      "doctor": "Dr. Riem",
+      "planner_bucket_id": "-3XzD9aIGUiMMZcIqgkRZ5cAJfJn",
+      "provider_doctor_email": "abdallari@waseel.com"
+    },    {
+      "file_name": "tala",
+      "username": "rpa1.tala",
+      "password": "portal_password",
+      "doctor": "Dr. Riem",
+      "planner_bucket_id": "-3XzD9aIGUiMMZcIqgkRZ5cAJfJn",
+      "provider_doctor_email": "abdallari@waseel.com"
+    },    {
+      "file_name": "takh",
+      "username": "rpa1.takh",
+      "password": "portal_password",
+      "doctor": "Dr. Riem",
+      "planner_bucket_id": "-3XzD9aIGUiMMZcIqgkRZ5cAJfJn",
+      "provider_doctor_email": "abdallari@waseel.com"
+    },    {
+      "file_name": "mass",
+      "username": "rpa1.mass",
+      "password": "portal_password",
+      "doctor": "Dr. Mohamed",
+      "planner_bucket_id": "_M6DgSa5Uk-qz8RBw3DlkJcAN3jh",
+      "provider_doctor_email": "ahmedmo@waseel.com"
+    },    {
+      "file_name": "shdm",
+      "username": "rpa1.shdm",
+      "password": "portal_password",
+      "doctor": "Dr. Amal",
+      "planner_bucket_id": "k9On3wnUGE-SLwshvbCqnpcAMfXi",
+      "provider_doctor_email": "mohamedam@Waseel.com"
+    },    {
+      "file_name": "midn",
+      "username": "rpa1.midn",
+      "password": "portal_password",
+      "doctor": "Dr. Alanoud",
+      "planner_bucket_id": "eWbwO3fXnEGMZLaPfZMyDZcANWrM",
+      "provider_doctor_email": "alqabbanial@Waseel.com"
+    },    {
+      "file_name": "khlod",
+      "username": "rpa1.khlod",
+      "password": "portal_password",
+      "doctor": "Dr. Alanoud",
+      "planner_bucket_id": "eWbwO3fXnEGMZLaPfZMyDZcANWrM",
+      "provider_doctor_email": "alqabbanial@Waseel.com"
+    },    {
+      "file_name": "mcs",
+      "username": "rpa1.mcs",
+      "password": "portal_password",
+      "doctor": "Dr. Riem",
+      "planner_bucket_id": "-3XzD9aIGUiMMZcIqgkRZ5cAJfJn",
+      "provider_doctor_email": "abdallari@waseel.com"
+    },    {
+      "file_name": "qima",
+      "username": "rpa1.qima",
+      "password": "portal_password",
+      "doctor": "Dr. Amal",
+      "planner_bucket_id": "k9On3wnUGE-SLwshvbCqnpcAMfXi",
+      "provider_doctor_email": "mohamedam@Waseel.com"
+    },    {
+      "file_name": "fctr",
+      "username": "rpa1.fctr",
+      "password": "portal_password",
+      "doctor": "Dr. Alanoud",
+      "planner_bucket_id": "eWbwO3fXnEGMZLaPfZMyDZcANWrM",
+      "provider_doctor_email": "alqabbanial@Waseel.com"
+    },        {
+      "file_name": "camc",
+      "username": "rpa1.camc",
+      "password": "portal_password",
+      "doctor": "Dr. Alanoud",
+      "planner_bucket_id": "eWbwO3fXnEGMZLaPfZMyDZcANWrM",
+      "provider_doctor_email": "alqabbanial@Waseel.com"
+    },    {
+      "file_name": "stp",
+      "username": "rpa1.stp",
+      "password": "portal_password",
+      "doctor": "Dr. Zahir",
+      "planner_bucket_id": "g3qhgQFBFkKTAXVC7FsxcJcAIxGW",
+      "provider_doctor_email": "othmanza@waseel.com"
+    },    {
+      "file_name": "orc1",
+      "username": "rpa1.orc1",
+      "password": "portal_password",
+      "doctor": "Dr. Zahir",
+      "planner_bucket_id": "g3qhgQFBFkKTAXVC7FsxcJcAIxGW",
+      "provider_doctor_email": "othmanza@waseel.com"
+    },       {
+      "file_name": "amnp",
+      "username": "rpa1.amnp",
+      "password": "portal_password",
+      "doctor": "Dr. Zahir",
+      "planner_bucket_id": "g3qhgQFBFkKTAXVC7FsxcJcAIxGW",
+      "provider_doctor_email": "othmanza@waseel.com"
+
+    },    {
+      "file_name": "snc",
+      "username": "rpa1.snc",
+      "password": "portal_password",
+      "doctor": "Dr. Zahir",
+      "planner_bucket_id": "g3qhgQFBFkKTAXVC7FsxcJcAIxGW",
+      "provider_doctor_email": "othmanza@waseel.com"
+
+    },    {
+      "file_name": "ahm",
+      "username": "rpa1.ahm",
+      "password": "portal_password",
+      "doctor": "Dr. Zahir",
+      "planner_bucket_id": "g3qhgQFBFkKTAXVC7FsxcJcAIxGW",
+      "provider_doctor_email": "othmanza@waseel.com"
+
+    },    {
+      "file_name": "qasm",
+      "username": "rpa1.qasm",
+      "password": "portal_password",
+      "doctor": "Dr. Mohamed",
+      "planner_bucket_id": "_M6DgSa5Uk-qz8RBw3DlkJcAN3jh",
+      "provider_doctor_email": "ahmedmo@waseel.com"
+
+    },    {
+      "file_name": "nomask",
+      "username": "rpa1.nomask",
+      "password": "portal_password",
+      "doctor": "Dr. Zahir",
+      "planner_bucket_id": "g3qhgQFBFkKTAXVC7FsxcJcAIxGW",
+      "provider_doctor_email": "othmanza@waseel.com"
+
+    },    {
+      "file_name": "nomasw",
+      "username": "rpa1.nomasw",
+      "password": "portal_password",
+      "doctor": "Dr. Zahir",
+      "planner_bucket_id": "g3qhgQFBFkKTAXVC7FsxcJcAIxGW",
+      "provider_doctor_email": "othmanza@waseel.com"
+
+    },    {
+      "file_name": "nomais",
+      "username": "rpa1.nomais",
+      "password": "portal_password",
+      "doctor": "Dr. Zahir",
+      "planner_bucket_id": "g3qhgQFBFkKTAXVC7FsxcJcAIxGW",
+      "provider_doctor_email": "othmanza@waseel.com"
+
+    },    {
+      "file_name": "aln1",
+      "username": "rpa1.aln1",
+      "password": "portal_password",
+      "doctor": "Dr. Zahir",
+      "planner_bucket_id": "g3qhgQFBFkKTAXVC7FsxcJcAIxGW",
+      "provider_doctor_email": "othmanza@waseel.com"
+
+    },    {
+      "file_name": "dad",
+      "username": "rpa1.dad",
+      "password": "portal_password",
+      "doctor": "Dr. Mohamed",
+      "planner_bucket_id": "_M6DgSa5Uk-qz8RBw3DlkJcAN3jh",
+      "provider_doctor_email": "ahmedmo@waseel.com"
+
+    }
+  ],
+  "smtp_host": "smtp.office365.com",
+  "smtp_port": 587,
+  "smtp_username": "rpa1@waseel.com",
+  "smtp_password": "smtp_password",
+  "smtp_displayname": "Approvals RPA",
+  "local_onedrive_path" : "local_onedrive_path",
+  "sp_input_folder" : "automations/TAWUNIYA REJECTION/INPUT",
+  "CLIENT_ID": "e5727438-df7b-4945-93b2-3cfb6dace85c",
+  "TENANT_ID": "7c01a8ce-61c6-4a98-a1c3-0062f98a7cc9",
+  "planner_flow_url": "https://prod-235.westeurope.logic.azure.com/workflows/4f6a63098a4147c396419f1cf851998a/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=jtqSPWvoK3p0JLoMAJ2C9Y191jhEZ0cGI5bF23u-lVA",
+  "planner_group_id": "af098b2b-b957-446f-9f4f-6af50e2059ec",
+  "planner_plan_id": "a_a7kn5WHEK36YqKVBOXipcAGWqP",
+  "provider_sp_folder_link": "https://waseel-my.sharepoint.com/:f:/p/rpa1/IgC5jDBFkR-zQb8asNhAazphAVHT97qrDAbKtnCYI45bvtM?e=3tH19f"
+}

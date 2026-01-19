@@ -530,15 +530,15 @@ def move_files(source, destination: Path = FINAL_DEST):
 
         target = destination / file.name
 
-        #Add to planner
+        #Add to planner & copy
 
         first_part = file.name.split("_")[0].lower()
 
         if first_part in providers:
 
             provider = providers[first_part]
-            taskname = f"Tawuniya {file.name}"
-            add_task_planner(task_name=taskname, filename=file.name, provider_id=first_part,
+            task_name = f"Tawuniya {file.name}"
+            add_task_planner(task_name=task_name, filename=file.name, provider_id=first_part,
                              provider_doctor_email=provider["provider_doctor_email"], planner_bucket_id=provider["bucket_id"])
             shutil.copy(file, target)
             logging.info(f"{file} copied to {target}")
